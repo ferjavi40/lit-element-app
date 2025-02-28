@@ -3,24 +3,24 @@ import {html, css, LitElement} from 'lit';
 class HeaderComponent extends LitElement {
   static styles = css`
     :host {
-      display: block;
-      background-color: grey;
-      color: white;
-      padding: 16px;
-      text-align: center;
-      font-family: Arial, sans-serif;
+        all: initial;
     }
   `;
+
+createRenderRoot() {
+    return this; // Renderiza en el Light DOM
+  }
 
   constructor() {
     super();
   }
 
   render() {
-    return html` <header>
-      <h1>Welcome to My App</h1>
-      <p>Your app's header</p>
-    </header>`;
+    return html` <nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+    </div>
+  </nav>`;
   }
 }
 
