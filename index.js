@@ -1,1 +1,2 @@
-import './src/components/my-component';
+import './src/views/home-view';
+import './src/components/header-component';
