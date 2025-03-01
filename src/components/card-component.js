@@ -81,7 +81,8 @@ class CardComponent extends LitElement {
             <h5 class="card-title">${card.title}</h5>
             <p class="card-text text-truncate">${card.description}</p>
             <div class="mt-auto">
-              <a href="#" class="btn btn-primary">See details</a>
+              <button class="btn btn-primary">See details</button>
+              <button class="btn btn-dark">Add to car</button>
             </div>
           </div>
         </div>
