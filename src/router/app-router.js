@@ -9,6 +9,7 @@ router.setRoutes([
     children: [
       {path: '/', component: 'home-view'},
       {path: '/all-products', component: 'all-products-view'},
+      {path: '/login', component: 'login-view'},
       {path: '(.*)', redirect: '/not-found-view'},
     ],
   },
