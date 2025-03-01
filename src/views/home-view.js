@@ -31,30 +31,46 @@ class HomeView extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.loadAllProducts();
+    this.loadNewProducts();
   }
 
   render() {
     return html`
       <div class="container mt-5">
+        <h2 class="text-center mb-4">Our recent products</h2>
         ${this.isLoading 
           ? html`<spinner-component></spinner-component>` 
-          : html`<card-component .dataCards="${this.data}"></card-component>`
+          : html`
+            <card-component .dataCards="${this.data}"></card-component>
+            <div class="container mt-4 d-flex justify-content-end">
+                <button type="button"
+                 class="btn btn-primary"
+                 @click="${ this.onClickSeeAllProducts }"
+                 >See all Products</button>
+            </div>
+            
+          `
         }
       </div>
     `;
   }
 
-  async loadAllProducts() {
+  async loadNewProducts() {
     try {
       const data = await this.apiService.getAllProducts('products');
-      this.data = data;
-      //console.log('data', this.data);
+      //pick 4 random elements just to show 
+      const newProductsData = data.sort(() => Math.random() - 0.5).slice(0, 4);
+      this.data = newProductsData;
     } catch (error) {
       console.log('no hay data', error);
     } finally {
-      this.isLoading = true;
+      this.isLoading = false;
     }
+  }
+
+
+  onClickSeeAllProducts() {
+    console.log('funciona');
   }
 }
 customElements.define('home-view', HomeView);

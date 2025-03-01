@@ -5,6 +5,11 @@ class SpinnerComponent extends LitElement {
     :host {
       all: initial;
     }
+
+    .spinner-grow {
+      width: 8rem;
+      height: 8rem;
+    }
   `;
 
   createRenderRoot() {
