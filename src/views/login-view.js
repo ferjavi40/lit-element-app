@@ -1,10 +1,21 @@
-import {LitElement, html } from 'lit';
+import {LitElement, html, css} from 'lit';
 class LoginView extends LitElement {
-    render() {
-      return html`
-        <login-form-component></login-form-component>
-      `;
+  static styles = css`
+    :host {
+      all: initial;
     }
+  `;
+
+  createRenderRoot() {
+    return this; // Renderiza en el Light DOM
   }
-  
-  customElements.define('login-view', LoginView);
+  render() {
+    return html`
+      <div class="container w-25">
+        <login-form-component></login-form-component>
+      </div>
+    `;
+  }
+}
+
+customElements.define('login-view', LoginView);
