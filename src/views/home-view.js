@@ -1,5 +1,6 @@
 import {LitElement, html, css} from 'lit';
-import {ApiService} from '../services/api-service.js';
+import { ApiService } from '../services/api-service.js';
+import { appRouter } from '../router/app-router.js';
 
 class HomeView extends LitElement {
   static get properties() {
@@ -70,7 +71,8 @@ class HomeView extends LitElement {
 
 
   onClickSeeAllProducts() {
-    console.log('funciona');
+    history.pushState({}, '', '/all-products');
+    appRouter.render('/all-products');
   }
 }
 customElements.define('home-view', HomeView);

@@ -4,21 +4,21 @@ import '../views/home-view';
 import '../views/not-found-view';
 import '../views/all-products-view';
 
+export const appRouter = new Router();
 
 class AppRouter extends LitElement {
   static styles = css`
     :host {
-        all: initial;
+      all: initial;
     }
   `;
 
-createRenderRoot() {
+  createRenderRoot() {
     return this; // Renderiza en el Light DOM
   }
 
   constructor() {
     super();
-    this.router = null;
   }
 
   connectedCallback() {
@@ -27,25 +27,31 @@ createRenderRoot() {
 
   firstUpdated() {
     this._initializeRouter();
+    this._setupPopStateListener();
   }
 
   _initializeRouter() {
-    // Seleccionamos el contenedor donde se renderizará el contenido
     const outlet = this.querySelector('#outlet');
-    console.log('oulet', outlet);
+    console.log('outlet', outlet);
 
-    // Configuramos las rutas
-    this.router = new Router(outlet);
-    this.router.setRoutes([
-      { path: '/', component: 'home-view' },
-      { path: '/all-products', component: 'all-products-view' },
-      { path: '(.*)', component: 'not-found' } // Ruta por defecto para "Página no encontrada"
+    appRouter.setRoutes([
+      { path: '/', component: 'home-view' }, 
+      { path: '/all-products', component: 'all-products-view' }, 
+      { path: '(.*)', component: 'not-found-view' }
     ]);
+    appRouter.setOutlet(outlet);
+  }
+
+  _setupPopStateListener() {
+    // Escucha el evento popstate (cuando el usuario usa el botón "Atrás" o "Adelante")
+    window.addEventListener('popstate', () => {
+      appRouter.render(window.location.pathname); // Renderiza la vista correspondiente
+    });
   }
 
   render() {
     return html`
-      <div id="outlet"></div> <!-- Contenedor para renderizar las vistas -->
+      <div id="outlet"></div>
     `;
   }
 }
