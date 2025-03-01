@@ -8,8 +8,8 @@ class HomeView extends LitElement {
         type: Array,
       },
       isLoading: {
-        type: Boolean
-      }
+        type: Boolean,
+      },
     };
   }
   static styles = css`
@@ -18,7 +18,7 @@ class HomeView extends LitElement {
     }
   `;
 
-createRenderRoot() {
+  createRenderRoot() {
     return this; // Renderiza en el Light DOM
   }
 
@@ -36,19 +36,24 @@ createRenderRoot() {
 
   render() {
     return html`
-        <card-component .dataCards="${this.data}"></card-component>
+      <div class="container mt-5">
+        ${this.isLoading 
+          ? html`<spinner-component></spinner-component>` 
+          : html`<card-component .dataCards="${this.data}"></card-component>`
+        }
+      </div>
     `;
   }
 
   async loadAllProducts() {
-    try{
-        const data = await this.apiService.getAllProducts('products');
-        this.data = data;
-        //console.log('data', this.data);
-    }catch(error){
-        console.log('no hay data', error);
-    }finally{
-        this.isLoading = false;
+    try {
+      const data = await this.apiService.getAllProducts('products');
+      this.data = data;
+      //console.log('data', this.data);
+    } catch (error) {
+      console.log('no hay data', error);
+    } finally {
+      this.isLoading = true;
     }
   }
 }

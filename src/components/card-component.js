@@ -64,12 +64,9 @@ class CardComponent extends LitElement {
 
   render() {
     return html`
-      <div class="container mt-5">
         <div class="row row-cols-1 row-cols-md-4 g-4">
           ${this.dataCards.map((card) => this.renderCard(card))}
         </div>
-        x
-      </div>
     `;
   }
 
