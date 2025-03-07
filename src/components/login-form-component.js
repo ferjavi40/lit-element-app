@@ -1,4 +1,5 @@
 import {html, css, LitElement} from 'lit';
+import {Router} from '@vaadin/router';
 
 class LoginFormComponent extends LitElement {
   static get properties() {
@@ -14,6 +15,9 @@ class LoginFormComponent extends LitElement {
       },
       errorMessage: {
         type: String,
+      },
+      baseDatos: {
+        type: Array,
       },
     };
   }
@@ -33,6 +37,12 @@ class LoginFormComponent extends LitElement {
     this.user = '';
     this.password = '';
     this.errorMessage = '';
+    this.baseDatos = [
+      {
+        password: '123456',
+        username: 'ferjavi1990@outlook.es',
+      },
+    ];
   }
 
   connectedCallback() {
@@ -100,6 +110,16 @@ class LoginFormComponent extends LitElement {
       console.log('completa los campos');
       return;
     }
+
+    const userExist = this.baseDatos.some((user)=>{
+        return user.username === this.username;
+    });
+
+    if(userExist) {
+        Router.go('/shopping-car'); // Redirige si el usuario existe
+        return;
+    }
+
     this.users = [
       ...this.users,
       {username: this.username, password: this.password},
@@ -108,10 +128,7 @@ class LoginFormComponent extends LitElement {
     this.password = '';
     this.errorMessage = '';
 
-    console.log('Usuarios registrados:', this.users);
-    this.users.forEach((user) => {
-      console.log('users', user.username);
-    });
+    //console.log('Usuarios registrados:', this.users);
   }
 }
 

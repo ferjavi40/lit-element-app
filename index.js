@@ -3,6 +3,7 @@ import './src/views/home-view';
 import './src/views/not-found-view';
 import './src/views/all-products-view';
 import './src/views/login-view';
+import './src/views/shopping-car-view';
 
 
 //components

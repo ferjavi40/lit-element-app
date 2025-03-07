@@ -10,6 +10,7 @@ router.setRoutes([
       {path: '/', component: 'home-view'},
       {path: '/all-products', component: 'all-products-view'},
       {path: '/login', component: 'login-view'},
+      {path: '/shopping-car', component: 'shopping-car-view'},
       {path: '(.*)', redirect: '/not-found-view'},
     ],
   },
