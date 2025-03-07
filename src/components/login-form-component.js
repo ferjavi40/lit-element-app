@@ -1,22 +1,22 @@
 import {html, css, LitElement} from 'lit';
 
 class LoginFormComponent extends LitElement {
-    static get properties() {
-        return {
-            users: { 
-                type: Array
-             },
-             user: {
-                type: String
-             },
-             password: {
-                type: String
-             },
-             errorMessage: { 
-                type: String 
-            },
-        };
-      }
+  static get properties() {
+    return {
+      users: {
+        type: Array,
+      },
+      user: {
+        type: String,
+      },
+      password: {
+        type: String,
+      },
+      errorMessage: {
+        type: String,
+      },
+    };
+  }
   static styles = css`
     :host {
       all: initial;
@@ -41,45 +41,48 @@ class LoginFormComponent extends LitElement {
 
   render() {
     return html`
-    <div class="mt-5">
-    ${this.errorMessage
+      <div class="mt-5">
+        ${this.errorMessage
           ? html`<div class="error-message">${this.errorMessage}</div>`
           : ''}
-    <form>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label"
-            >Email address</label
-          >
-          <input
-          .value="${this.user}"
-            type="email"
-            class="form-control"
-            id="username"
-            aria-describedby="emailHelp"
-            @input="${ this.handleUsernameChange }"
-            required
-          />
-          <div id="emailHelp" class="form-text">
-            We'll never share your email with anyone else.
+        <form>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"
+              >Email address</label
+            >
+            <input
+              .value="${this.user}"
+              type="email"
+              class="form-control"
+              id="username"
+              aria-describedby="emailHelp"
+              @input="${this.handleUsernameChange}"
+              required
+            />
+            <div id="emailHelp" class="form-text">
+              We'll never share your email with anyone else.
+            </div>
           </div>
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input
-            .value="${this.password}"
-            id="password"
-            type="password"
-            class="form-control"
-            @input="${ this.handlePasswordChange }"
-            required
-          />
-        </div>
-        <button class="btn btn-primary" @click="${ this.handleLogin }">Submit</button>
-      </form>
-    </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label"
+              >Password</label
+            >
+            <input
+              .value="${this.password}"
+              id="password"
+              type="password"
+              class="form-control"
+              @input="${this.handlePasswordChange}"
+              required
+            />
+          </div>
+          <button class="btn btn-primary" @click="${this.handleLogin}">
+            Submit
+          </button>
+        </form>
+      </div>
     `;
   }
-
 
   handleUsernameChange(event) {
     this.username = event.target.value;
@@ -89,31 +92,27 @@ class LoginFormComponent extends LitElement {
     this.password = event.target.value;
   }
 
-
   handleLogin(event) {
     console.log('funciona');
     event.preventDefault();
     if (!this.username || !this.password) {
-        this.errorMessage = 'Por favor, completa todos los campos.';
-        console.log('completa los campos');
-        return;
-      }
-      this.users = [
-        ...this.users,
-        { username: this.username, password: this.password },
-      ];
+      this.errorMessage = 'Por favor, completa todos los campos.';
+      console.log('completa los campos');
+      return;
+    }
+    this.users = [
+      ...this.users,
+      {username: this.username, password: this.password},
+    ];
     this.username = '';
     this.password = '';
     this.errorMessage = '';
 
     console.log('Usuarios registrados:', this.users);
-    this.users.forEach((user)=>{
-        console.log('users',user.username);
-    })
-    
+    this.users.forEach((user) => {
+      console.log('users', user.username);
+    });
   }
-
-
 }
 
 customElements.define('login-form-component', LoginFormComponent);
